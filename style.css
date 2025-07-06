@@ -1,0 +1,38 @@
+body{
+    background-color: #000;
+    color:#fff;
+}
+
+.tektur-sample{
+    font-family: "Tektur", sans-serif;
+}
+
+.glowing{
+    width: 20px;
+    height: 20px;
+    background-color: rgb(255, 15, 15);
+    border-radius: 50%;
+}
+
+h1{
+    text-align: center;
+    font-size:3vw;
+}
+
+#clock{
+    text-align: center;
+    font-size: 6vw;
+}
+
+#binary-clock{
+    height: 25vw;
+    width: 70vw;
+    margin-left: auto;
+    margin-right:auto;
+    font-size: 2vw;
+    table-layout: fixed;
+}
+
+th{
+    text-align: left;
+}
