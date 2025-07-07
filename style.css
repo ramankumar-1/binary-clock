@@ -1,6 +1,16 @@
-body{
+body {
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #000;
-    color:#fff;
+    color: #fff;
+    font-family: "Tektur", sans-serif;
+    box-sizing: border-box;
+    flex-direction: column;
 }
 
 .tektur-sample{
@@ -12,16 +22,24 @@ body{
     height: 20px;
     background-color: rgb(255, 15, 15);
     border-radius: 50%;
+    display: inline-block;
+    margin: 0.2em;
+    box-shadow: 0 0 10px 2px rgba(255,15,15,0.7);
 }
 
 h1{
     text-align: center;
     font-size:3vw;
+    margin-top: 2vw;
 }
 
 #clock{
     text-align: center;
     font-size: 6vw;
+    border: none;
+    margin-bottom: 2vw;
+    letter-spacing: 0.3em;
+    padding-left: 0.5em;
 }
 
 #binary-clock{
@@ -31,8 +49,74 @@ h1{
     margin-right:auto;
     font-size: 2vw;
     table-layout: fixed;
+    border-radius: 1vw;
+    padding: 1vw;
 }
 
 th{
     text-align: left;
+}
+
+/* 
+    Responsive styles for tablets and below.
+    Adjusts font sizes and table width for better viewing on medium screens.
+*/
+@media (max-width: 900px) {
+    #clock {
+        font-size: 8vw;
+    }
+    #binary-clock {
+        width: 90vw;
+        height: 40vw;
+        font-size: 3vw;
+        padding: 2vw;
+    }
+    h1 {
+        font-size: 5vw;
+    }
+}
+
+/* 
+    Responsive styles for mobile.
+    Centers content, increases font and dot size, and makes table full width.
+*/
+@media (max-width: 600px) {
+    body {
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+    #clock {
+        font-size: 12vw;
+        margin-bottom: 4vw;
+    }
+    #binary-clock {
+        width: 98vw;
+        height: auto;
+        font-size: 5vw;
+        padding: 3vw 1vw;
+        border-radius: 3vw;
+    }
+    h1 {
+        font-size: 8vw;
+        margin-top: 4vw;
+    }
+    .glowing {
+        width: 12vw;
+        height: 12vw;
+        margin: 0.5vw;
+    }
+}
+
+/* 
+    Ensures the whole clock stays centered vertically and horizontally.
+*/
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
 }
