@@ -10,52 +10,58 @@
          rel="stylesheet">
     </head>
     <body>
-        <h1 class="tektur-sample">the time is . . .</h1>
-        <table class="tektur-sample" id="binary-clock">
-            <tr>
-                <th></th>
-                <th colspan="2">hours</th>
-                <th colspan="2">minutes</th>
-                <th colspan="2">seconds</th>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td><div id="h_tens_8"></div></td>
-                <td><div id="h_ones_8"></div></td>
-                <td><div id="m_tens_8"></div></td>
-                <td><div id="m_ones_8"></div></td>
-                <td><div id="s_tens_8"></div></td>
-                <td><div id="s_ones_8"></div></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td><div id="h_tens_4"></div></td>
-                <td><div id="h_ones_4"></div></td>
-                <td><div id="m_tens_4"></div></td>
-                <td><div id="m_ones_4"></div></td>
-                <td><div id="s_tens_4"></div></td>
-                <td><div id="s_ones_4"></div></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td><div id="h_tens_2"></div></td>
-                <td><div id="h_ones_2"></div></td>
-                <td><div id="m_tens_2"></div></td>
-                <td><div id="m_ones_2"></div></td>
-                <td><div id="s_tens_2"></div></td>
-                <td><div id="s_ones_2"></div></td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td><div id="h_tens_1"></div></td>
-                <td><div id="h_ones_1"></div></td>
-                <td><div id="m_tens_1"></div></td>
-                <td><div id="m_ones_1"></div></td>
-                <td><div id="s_tens_1"></div></td>
-                <td><div id="s_ones_1"></div></td>
-            </tr>
-        </table>
-        <div id="clock" class="tektur-sample"></div>
+        <!-- 
+            Wrapped the entire clock in a .clock-container div 
+            for easier centering and responsive layout.
+        -->
+        <div class="clock-container">
+            <h1 class="tektur-sample">the time is . . .</h1>
+            <table class="tektur-sample" id="binary-clock">
+                <tr>
+                    <th></th>
+                    <th colspan="2">hours</th>
+                    <th colspan="2">minutes</th>
+                    <th colspan="2">seconds</th>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td><div id="h_tens_8"></div></td>
+                    <td><div id="h_ones_8"></div></td>
+                    <td><div id="m_tens_8"></div></td>
+                    <td><div id="m_ones_8"></div></td>
+                    <td><div id="s_tens_8"></div></td>
+                    <td><div id="s_ones_8"></div></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><div id="h_tens_4"></div></td>
+                    <td><div id="h_ones_4"></div></td>
+                    <td><div id="m_tens_4"></div></td>
+                    <td><div id="m_ones_4"></div></td>
+                    <td><div id="s_tens_4"></div></td>
+                    <td><div id="s_ones_4"></div></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><div id="h_tens_2"></div></td>
+                    <td><div id="h_ones_2"></div></td>
+                    <td><div id="m_tens_2"></div></td>
+                    <td><div id="m_ones_2"></div></td>
+                    <td><div id="s_tens_2"></div></td>
+                    <td><div id="s_ones_2"></div></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><div id="h_tens_1"></div></td>
+                    <td><div id="h_ones_1"></div></td>
+                    <td><div id="m_tens_1"></div></td>
+                    <td><div id="m_ones_1"></div></td>
+                    <td><div id="s_tens_1"></div></td>
+                    <td><div id="s_ones_1"></div></td>
+                </tr>
+            </table>
+            <div id="clock" class="tektur-sample"></div>
+        </div>
         <script src="script.js"></script>
         <noscript>Please enable JavaScript !</noscript>
     </body>
