@@ -1,117 +1,114 @@
-var clock=document.getElementById("clock");
+// Get clock display element
+const clock = document.getElementById("clock");
 
-var hours_tens=[document.getElementById("h_tens_8"), document.getElementById("h_tens_4"), 
-document.getElementById("h_tens_2"), document.getElementById("h_tens_1")];
-
-var hours_ones=[document.getElementById("h_ones_8"), document.getElementById("h_ones_4"), 
-document.getElementById("h_ones_2"), document.getElementById("h_ones_1")];
-
-var minutes_tens=[document.getElementById("m_tens_8"), document.getElementById("m_tens_4"), 
-document.getElementById("m_tens_2"), document.getElementById("m_tens_1")];
-
-var minutes_ones=[document.getElementById("m_ones_8"), document.getElementById("m_ones_4"), 
-document.getElementById("m_ones_2"), document.getElementById("m_ones_1")];
-
-var seconds_tens=[document.getElementById("s_tens_8"), document.getElementById("s_tens_4"), 
-document.getElementById("s_tens_2"), document.getElementById("s_tens_1")];
-
-var seconds_ones=[document.getElementById("s_ones_8"), document.getElementById("s_ones_4"), 
-document.getElementById("s_ones_2"), document.getElementById("s_ones_1")];
-
-// convert number to Binary-coded Decimal
-function toBCD(n){ 
-    if(Number.isInteger(n)){
-        return n.toString().split('').map(digit=>parseInt(digit)
-        .toString(2).padStart(4,'0')).join('');
+// Create a more maintainable data structure for bit elements
+const bitElements = {
+    hours: {
+        tens: [
+            document.getElementById("h_tens_8"),
+            document.getElementById("h_tens_4"),
+            document.getElementById("h_tens_2"),
+            document.getElementById("h_tens_1")
+        ],
+        ones: [
+            document.getElementById("h_ones_8"),
+            document.getElementById("h_ones_4"),
+            document.getElementById("h_ones_2"),
+            document.getElementById("h_ones_1")
+        ]
+    },
+    minutes: {
+        tens: [
+            document.getElementById("m_tens_8"),
+            document.getElementById("m_tens_4"),
+            document.getElementById("m_tens_2"),
+            document.getElementById("m_tens_1")
+        ],
+        ones: [
+            document.getElementById("m_ones_8"),
+            document.getElementById("m_ones_4"),
+            document.getElementById("m_ones_2"),
+            document.getElementById("m_ones_1")
+        ]
+    },
+    seconds: {
+        tens: [
+            document.getElementById("s_tens_8"),
+            document.getElementById("s_tens_4"),
+            document.getElementById("s_tens_2"),
+            document.getElementById("s_tens_1")
+        ],
+        ones: [
+            document.getElementById("s_ones_8"),
+            document.getElementById("s_ones_4"),
+            document.getElementById("s_ones_2"),
+            document.getElementById("s_ones_1")
+        ]
     }
+};
+
+/**
+ * Convert a number to Binary-Coded Decimal (BCD)
+ * Each digit is converted to its 4-bit binary representation
+ * @param {number} n - The number to convert
+ * @returns {string} BCD representation as a string of 0s and 1s
+ */
+function toBCD(n) {
+    if (!Number.isInteger(n)) return "";
+    return n
+        .toString()
+        .split("")
+        .map(digit => parseInt(digit).toString(2).padStart(4, "0"))
+        .join("");
 }
 
-// main function to tick the clock
-function tick(){
-    let now=new Date()
+/**
+ * Update the display for tens and ones place digits
+ * @param {string} bcdString - BCD representation (8 bits: 4 for tens, 4 for ones)
+ * @param {HTMLElement[]} tensElements - DOM elements for tens place bits
+ * @param {HTMLElement[]} onesElements - DOM elements for ones place bits
+ */
+function updateBinaryDisplay(bcdString, tensElements, onesElements) {
+    const tensBits = bcdString.slice(0, 4);
+    const onesBits = bcdString.slice(4, 8);
 
-    let hours=now.getHours();
-    let minutes=now.getMinutes();
-    let seconds=now.getSeconds();
+    // Update tens place (first 4 bits)
+    tensBits.split("").forEach((bit, index) => {
+        tensElements[index].classList.toggle("glowing", bit === "1");
+    });
 
-    clock.innerHTML=String(hours).padStart(2,"0")+" : "+
-    String(minutes).padStart(2,"0")+
-    " : "+String(seconds).padStart(2,"0");
+    // Update ones place (last 4 bits)
+    onesBits.split("").forEach((bit, index) => {
+        onesElements[index].classList.toggle("glowing", bit === "1");
+    });
+}
 
-    var i=0,j=0,k=0;
-    for(let bit of toBCD(hours)){
-        // edit the binary representation of tens place digit
-        if(i<4){
-            if(bit === "0"){
-                hours_tens[j].classList.remove("glowing");
-            }
-            else{
-                hours_tens[j].classList.add("glowing");
-            }
-            j++;
-        }
-        // edit the binary representation of ones place digit
-        else{
-            if(bit === "0"){
-                hours_ones[k].classList.remove("glowing");
-            }
-            else{
-                hours_ones[k].classList.add("glowing");
-            }
-            k++;
-        }
-        i++;
-    }
+/**
+ * Main clock update function
+ * Fetches current time and updates all binary digit displays
+ */
+function tick() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
 
-    i=0;
-    j=0;
-    k=0;
-    for(let bit of toBCD(minutes)){
-        if(i<4){
-            if(bit === "0"){
-                minutes_tens[j].classList.remove("glowing");
-            }
-            else{
-                minutes_tens[j].classList.add("glowing");
-            }
-            j++;
-        }
-        else{
-            if(bit === "0"){
-                minutes_ones[k].classList.remove("glowing");
-            }
-            else{
-                minutes_ones[k].classList.add("glowing");
-            }
-            k++;
-        }
-        i++;
-    }
+    // Update analog time display
+    clock.innerHTML =
+        String(hours).padStart(2, "0") +
+        " : " +
+        String(minutes).padStart(2, "0") +
+        " : " +
+        String(seconds).padStart(2, "0");
 
-    i=0;
-    j=0;
-    k=0;
-    for(let bit of toBCD(seconds)){
-        if(i<4){
-            if(bit === "0"){
-                seconds_tens[j].classList.remove("glowing");
-            }
-            else{
-                seconds_tens[j].classList.add("glowing");
-            }
-            j++;
-        }
-        else{
-            if(bit === "0"){
-                seconds_ones[k].classList.remove("glowing");
-            }
-            else{
-                seconds_ones[k].classList.add("glowing");
-            }
-            k++;
-        }
-        i++;
-    }
-}   
+    // Update binary displays for each time unit
+    updateBinaryDisplay(toBCD(hours), bitElements.hours.tens, bitElements.hours.ones);
+    updateBinaryDisplay(toBCD(minutes), bitElements.minutes.tens, bitElements.minutes.ones);
+    updateBinaryDisplay(toBCD(seconds), bitElements.seconds.tens, bitElements.seconds.ones);
+}
 
+// Update clock every second
 setInterval(tick, 1000);
+
+// Initial tick to avoid blank display on page load
+tick();
